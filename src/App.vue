@@ -1,60 +1,54 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+  <div>
+    <tags-list :tags="tags" />
+    <tags-list :tags="tags" alignment="space-between" />
+    <div class="half"><tags-list :tags="tags" /></div>
+    <div class="half"><tags-list :tags="tags" alignment="space-between" /></div>
+    <v-btn type="button" @click="addTag">Add Tag</v-btn>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import TagsList from './components/TagsList.vue';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    TagsList
   },
 
   data: () => ({
-    //
+    tags: [
+      {
+        text: 'HTML',
+        icon: 'mdi-language-html5'
+      },
+      {
+        text: 'CSS',
+        icon: 'mdi-language-css3',
+      },
+      {
+        text: 'JavaScript',
+      },
+      {
+        text: 'TheVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongTag',
+      },
+    ],
   }),
+
+  methods: {
+    addTag() {
+      this.tags.push({
+        text: "WebAssembly",
+      });
+    }
+  },
 };
 </script>
+
+<style lang="scss">
+.half {
+  width: 50%;
+}
+</style>
